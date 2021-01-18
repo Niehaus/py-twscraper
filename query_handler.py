@@ -13,13 +13,13 @@ class Scraper:
 
         # Use csv writer
         csv_writer = csv.writer(csv_file)
-        csv_writer.writerow(['username',  'mentionedUsers'])
+        csv_writer.writerow(['username', 'content', 'mentionedUsers'])
 
         for i, tweet in enumerate(sntwitter.TwitterSearchScraper(
                 keyword + f' since:{since_date} '
                           f'until:{until_date} '
                           f'-filter:links '
-                          f'-filter:replies').get_items()):
+                         ).get_items()):
             mentions = []
             if tweet.mentionedUsers is not None:
                 for mentionedUser in tweet.mentionedUsers:
@@ -33,9 +33,14 @@ class Scraper:
 
             if i > max_tweets:
                 break
+            print(tweet)
             csv_writer.writerow([row_tweet['username'],
                                  row_tweet['content'],
                                  row_tweet['mentionedUsers']
                                  ])
         csv_file.close()
         print(f'Tweets scraped by hashtag, check out scraped_tweets_csv/{filename}.csv')
+
+    @staticmethod
+    def arestas_by_mentions():
+        ...

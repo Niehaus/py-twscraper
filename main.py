@@ -25,18 +25,27 @@ dates = [('2020-03-01', '2020-03-31'),  # março
          ('2020-11-01', '2020-11-30'),  # novembro
          ('2020-12-01', '2020-12-31')]  # dezembro
 
-hashtags = ['#cloroquina', '#hidroxicloroquina']
+keywords = ['cloroquina', 'hidroxicloroquina']
 
-for hashtag in hashtags:
-    for i in range(0, len(filenames)):
-        params = {
-            'filename': 'cloroquina_' + filenames[i],
-            'since_date': dates[i][0],
-            'until_date': dates[i][1],
-            'keyword': hashtag,
-            'max_tweets': 1500
-        }
-        print(params)
-        twitter_scraper.scrape_hashtag_tweets(**params)
-    print('\n')
+# for keyword in keywords:
+#     for i in range(0, len(filenames)):
+#         params = {
+#             'filename': 'cloroquina_' + filenames[i],
+#             'since_date': dates[i][0],
+#             'until_date': dates[i][1],
+#             'keyword': keywords,
+#             'max_tweets': 1500
+#         }
+#         print(params)
+#         twitter_scraper.scrape_hashtag_tweets(**params)
+#     print('\n')
 
+params = {
+    'filename': 'cloroquina_' + filenames[1],
+    'since_date': dates[1][0],
+    'until_date': dates[1][1],
+    'keyword': keywords[0],
+    'max_tweets': 15
+}
+print(params)
+twitter_scraper.scrape_hashtag_tweets(**params)
