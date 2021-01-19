@@ -7,6 +7,7 @@ para duas hashtags:
 @date: 18/01/2021
 """
 from query_handler import Scraper
+import pprint
 from utils import csv_handler
 
 twitter_scraper = Scraper()
@@ -42,15 +43,16 @@ keywords = ['cloroquina', 'hidroxicloroquina']
 #     print('\n')
 
 params = {
-    'filename': 'cloroquina_' + filenames[1],
     'since_date': dates[1][0],
     'until_date': dates[1][1],
     'keyword': keywords[0],
     'max_tweets': 15
 }
-
-content = twitter_scraper.scrape_tweets_by_content(**params)
+# print(params)
+# content = twitter_scraper.scrape_tweets_by_content(**params)
 # twitter_scraper.get_user_info('leugolas')
+filename = 'cloroquina_' + filenames[1]
+headers = ['Id', 'Label', 'mentioned_users']
 
-row = ['Id', 'Label', 'mentioned_users']
-csv_handler('result_test', content, row)
+# csv_handler('result_test', content, headers)
+twitter_scraper.cli_scrape_tweets_by_content(**params)
