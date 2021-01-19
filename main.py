@@ -7,6 +7,7 @@ para duas hashtags:
 @date: 18/01/2021
 """
 from query_handler import Scraper
+from utils import csv_handler
 
 twitter_scraper = Scraper()
 
@@ -47,5 +48,9 @@ params = {
     'keyword': keywords[0],
     'max_tweets': 15
 }
-print(params)
-twitter_scraper.scrape_hashtag_tweets(**params)
+
+content = twitter_scraper.scrape_tweets_by_content(**params)
+# twitter_scraper.get_user_info('leugolas')
+
+row = ['Id', 'Label', 'mentioned_users']
+csv_handler('result_test', content, row)
