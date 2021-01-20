@@ -6,7 +6,7 @@ para duas hashtags:
 @author: Bárbara Boechat
 @date: 18/01/2021
 """
-from query_handler import Scraper
+from query_handler import Scraper, Gephi
 import pprint
 from utils import csv_handler
 
@@ -46,13 +46,13 @@ params = {
     'since_date': dates[1][0],
     'until_date': dates[1][1],
     'keyword': keywords[0],
-    'max_tweets': 15
+    'max_tweets': 2
 }
-# print(params)
-# content = twitter_scraper.scrape_tweets_by_content(**params)
-# twitter_scraper.get_user_info('leugolas')
-filename = 'cloroquina_' + filenames[1]
-headers = ['Id', 'Label', 'mentioned_users']
 
+# filename = 'cloroquina_' + filenames[1]
+# headers = ['Id', 'Label', 'mentioned_users']
 # csv_handler('result_test', content, headers)
-twitter_scraper.cli_scrape_tweets_by_content(**params)
+
+scraped_tweets = twitter_scraper.cli_scrape_tweets_by_content(**params)
+gephi_content = Gephi(scraped_tweets)
+gephi_content.create_nw_mentions_rts()
