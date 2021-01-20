@@ -19,3 +19,7 @@ def csv_handler(filename, csv_content, headers):
 
     csv_file.close()
     print(f'Check out scraped_tweets_csv/{filename}.csv')
+
+
+def get_key_list(my_dict):
+    return list(my_dict.keys())

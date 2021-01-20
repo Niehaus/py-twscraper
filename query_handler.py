@@ -1,6 +1,5 @@
 import json
 import os
-from pprint import pprint
 
 import snscrape.modules.twitter as sntwitter
 
@@ -60,6 +59,7 @@ class Scraper:
 
             username = data['user']['username']
             verified = data['user']['verified']
+            followers = data['user']['followersCount']
             mentioned_users = data['mentionedUsers']
             quoted_tweet = data['quotedTweet']
 
@@ -70,6 +70,7 @@ class Scraper:
                 'Id': data['id'],
                 'Label': username,
                 'link': f'https://twitter.com/{username}',
+                'followers': followers,
                 'content': data['renderedContent'],
                 'mentioned_users': ' '.join(mentions),
                 'verified': verified,
@@ -91,66 +92,6 @@ class Iramuteq:
         ...
 
 
-class Gephi:
-
-    def __init__(self, scraped_tweets):
-        self.tweets = scraped_tweets
-        self.graph = GephiData()
-
-    def create_nw_mentions_rts(self):
-        for tweet in self.tweets:
-            if not self.graph.node_exists(tweet):
-                # pprint(tweet)
-                self.create_node(tweet)
-                self.create_nodes_mentions(tweet['mentioned_users'])
-        pprint(self.graph.nodes)
-        self.create_edge(self.tweets[0], self.tweets[1])
-        # pprint(self.graph.edges)
-
-    def create_edge(self, source, target, label=0):
-        edge = {
-            'Source': source['Id'],
-            'Target': target['Id'],
-            'Type': 'Directed',
-            'Label': label,
-            'timeset': '',
-            'Weight': 1
-        }
-
-        self.graph.edges.append(edge)
-
-    def create_node(self, tweet):
-        node = {
-            'Id': tweet['Id'],
-            'Label': tweet['Label'],
-            'link': tweet['link'],
-            'verified': tweet['verified']
-        }
-
-        self.graph.nodes.append(node)
-
-    def create_nodes_mentions(self, mentions):
-        if mentions != 'None':
-            mentions_list = mentions.split(' ')
-            for mention in mentions_list:
-                node_info = get_user_info(mention)
-                self.create_node(node_info)
-                # não esquecer de criar uma aresta entre o nó que mencionou who_mentioned
-
-
-class GephiData:
-
-    def __init__(self):
-        self.nodes = []
-        self.edges = []
-
-    def node_exists(self, tweet):
-        for node in self.nodes:
-            if tweet['Id'] == node['Id']:
-                return True
-            return False
-
-
 # Aux methods to get specific tweet info
 def is_retweet(quoted_tweet):
     if quoted_tweet is not None:
@@ -164,19 +105,5 @@ def mentions_in_tweet(mentioned_users):
         for user in mentioned_users:
             mentions.append(user['username'])
     else:
-        mentions.append('None')
-
+        mentions.append('No Mentions')
     return mentions
-
-
-def get_user_info(username):
-    user = sntwitter.TwitterUserScraper(username).entity
-    user_info = {
-        'Id': user.id,
-        'Label': user.username,
-        'link': f'https://twitter.com/{user.username}',
-        'verified': user.verified,
-        'followersCount': user.followersCount
-    }
-
-    return user_info

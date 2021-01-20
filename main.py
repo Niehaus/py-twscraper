@@ -6,9 +6,10 @@ para duas hashtags:
 @author: Bárbara Boechat
 @date: 18/01/2021
 """
-from query_handler import Scraper, Gephi
-import pprint
-from utils import csv_handler
+from query_handler import Scraper
+from gephi_usage import Gephi
+from pprint import pprint
+from utils import csv_handler, get_key_list
 
 twitter_scraper = Scraper()
 
@@ -46,7 +47,7 @@ params = {
     'since_date': dates[1][0],
     'until_date': dates[1][1],
     'keyword': keywords[0],
-    'max_tweets': 2
+    'max_tweets': 150
 }
 
 # filename = 'cloroquina_' + filenames[1]
@@ -55,4 +56,27 @@ params = {
 
 scraped_tweets = twitter_scraper.cli_scrape_tweets_by_content(**params)
 gephi_content = Gephi(scraped_tweets)
-gephi_content.create_nw_mentions_rts()
+# gephi_content.graph_of_mentions()
+gephi_content.graph_of_rts()
+
+# Get headers for Gephi csv files
+nodes_headers = get_key_list(
+                gephi_content.graph.nodes[-1])
+edges_headers = get_key_list(
+                gephi_content.graph.edges[-1])
+
+print('writing nodes')
+# Write node files for retweets
+csv_handler(
+    'nodes_rt_abril',
+    gephi_content.graph.nodes,
+    nodes_headers
+)
+print('writing edges')
+# Write edges files for retweets
+csv_handler(
+    'edges_rt_abril',
+    gephi_content.graph.edges,
+    edges_headers
+)
+
