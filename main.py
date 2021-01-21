@@ -8,6 +8,7 @@ para duas hashtags:
 """
 from query_handler import Scraper
 from gephi_usage import Gephi
+from iramuteq_usage import Iramuteq
 from pprint import pprint
 from utils import csv_handler, get_key_list
 
@@ -56,27 +57,38 @@ params = {
 
 scraped_tweets = twitter_scraper.cli_scrape_tweets_by_content(**params)
 gephi_content = Gephi(scraped_tweets)
-# gephi_content.graph_of_mentions()
+
 gephi_content.graph_of_rts()
-
-# Get headers for Gephi csv files
-nodes_headers = get_key_list(
-                gephi_content.graph.nodes[-1])
-edges_headers = get_key_list(
-                gephi_content.graph.edges[-1])
-
-print('writing nodes')
-# Write node files for retweets
-csv_handler(
-    'nodes_rt_abril',
+# gephi_content.graph_of_mentions()
+iramuteq_mentions = Iramuteq(
     gephi_content.graph.nodes,
-    nodes_headers
+    scraped_tweets,
+    ['tweet', 'rts']
 )
-print('writing edges')
-# Write edges files for retweets
-csv_handler(
-    'edges_rt_abril',
-    gephi_content.graph.edges,
-    edges_headers
-)
+
+iramuteq_mentions.create_file('iramuteq_rts_abril')
+
+# print(iramuteq_mentions.tweets)
+
+#
+# # Get headers for Gephi csv files
+# nodes_headers = get_key_list(
+#                 gephi_content.graph.nodes[-1])
+# edges_headers = get_key_list(
+#                 gephi_content.graph.edges[-1])
+#
+# print('Writing nodes file')
+# # Write node files for retweets
+# csv_handler(
+#     'nodes_mentions_abril',
+#     gephi_content.graph.nodes,
+#     nodes_headers
+# )
+# print('Writing edges file')
+# # Write edges files for retweets
+# csv_handler(
+#     'edges_mentions_abril',
+#     gephi_content.graph.edges,
+#     edges_headers
+# )
 

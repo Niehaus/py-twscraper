@@ -85,13 +85,6 @@ class Scraper:
         return scraped_tweets
 
 
-class Iramuteq:
-
-    @staticmethod
-    def iramuteq_data_processor(content, variables):
-        ...
-
-
 # Aux methods to get specific tweet info
 def is_retweet(quoted_tweet):
     if quoted_tweet is not None:

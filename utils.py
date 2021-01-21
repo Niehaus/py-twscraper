@@ -3,7 +3,7 @@ import csv
 
 def csv_handler(filename, csv_content, headers):
     # Open/create a file to append data to
-    filepath = 'scraped_tweets_csv/' + filename
+    filepath = f'scraped_tweets_csv/{filename}.csv'
     csv_file = open(filepath, 'a', newline='', encoding='utf8')
 
     # Use csv writer
