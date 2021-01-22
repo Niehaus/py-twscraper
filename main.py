@@ -71,7 +71,7 @@ gephi_content.graph_of_mentions()
 # print(iramuteq_mentions.tweets)
 
 #
-# Get headers for Gephi csv files
+# # Get headers for Gephi csv files
 nodes_headers = get_key_list(
                 gephi_content.graph.nodes[-1])
 edges_headers = get_key_list(
@@ -80,14 +80,14 @@ edges_headers = get_key_list(
 print('Writing nodes file')
 # Write node files for retweets
 csv_handler(
-    'nodes_mentions_maio',
+    'nodes_mentions_abril_test2',
     gephi_content.graph.nodes,
     nodes_headers
 )
 print('Writing edges file')
 # Write edges files for retweets
 csv_handler(
-    'edges_mentions_maio',
+    'edges_mentions_abril_test2',
     gephi_content.graph.edges,
     edges_headers
 )

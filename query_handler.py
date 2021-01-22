@@ -98,4 +98,10 @@ def mentions_in_tweet(mentioned_users):
             mentions.append(user['username'])
     else:
         mentions.append('No Mentions')
+    mentions = remove_duplicates(mentions)
+
     return mentions
+
+
+def remove_duplicates(mylist):
+    return list(dict.fromkeys(mylist))
