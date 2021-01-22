@@ -7,6 +7,7 @@ class Gephi:
 
     def __init__(self, scraped_tweets):
         self.tweets = scraped_tweets
+        self.used_ids = []
         self.graph = GephiData()
 
     def graph_of_mentions(self):
@@ -55,19 +56,25 @@ class Gephi:
             'verified': tweet['verified']
         }
 
+        self.used_ids.append(node['Label'])
         self.graph.nodes.append(node)
 
     def create_nodes_mentions(self, mentions, who_mentioned, counter):
         if mentions != 'No Mentions':
             mentions_list = mentions.split(' ')
             for mention in mentions_list:
-                try:
+                if mention not in self.used_ids:
                     target_node = get_user_info(mention)
-                    if not self.graph.node_exists(target_node):
-                        self.create_node(target_node)
+                else:
+                    target_node = self.get_node(mention)
+                if target_node is not None:
+                    self.create_node(target_node)
                     self.create_edge(who_mentioned, target_node, counter)
-                except KeyError:
-                    print(f"User {mention} suspended or not exist")
+
+    def get_node(self, target_node):
+        for tweet in self.tweets:
+            if target_node == tweet['Label']:
+                return tweet
 
 
 class GephiData:
@@ -85,13 +92,23 @@ class GephiData:
 
 # Aux scraper method to get a specific user info
 def get_user_info(username):
-    user = sntwitter.TwitterUserScraper(username).entity
-    user_info = {
-        'Id': user.id,
-        'Label': user.username,
-        'link': f'https://twitter.com/{user.username}',
-        'verified': user.verified,
-        'followers': user.followersCount
-    }
 
-    return user_info
+    try:
+        user = sntwitter.TwitterUserScraper(username).entity
+    except KeyError:
+        print(f"User {username} suspended or not exist")
+        user = None
+
+    if user is not None:
+        user_info = {
+            'Id': user.id,
+            'Label': user.username,
+            'link': f'https://twitter.com/{user.username}',
+            'verified': user.verified,
+            'followers': user.followersCount
+        }
+
+        return user_info
+    else:
+        return None
+

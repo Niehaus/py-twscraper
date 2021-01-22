@@ -48,7 +48,7 @@ params = {
     'since_date': dates[1][0],
     'until_date': dates[1][1],
     'keyword': keywords[0],
-    'max_tweets': 150
+    'max_tweets': 500
 }
 
 # filename = 'cloroquina_' + filenames[1]
@@ -58,37 +58,37 @@ params = {
 scraped_tweets = twitter_scraper.cli_scrape_tweets_by_content(**params)
 gephi_content = Gephi(scraped_tweets)
 
-gephi_content.graph_of_rts()
-# gephi_content.graph_of_mentions()
-iramuteq_mentions = Iramuteq(
-    gephi_content.graph.nodes,
-    scraped_tweets,
-    ['tweet', 'rts']
-)
+# gephi_content.graph_of_rts()
+gephi_content.graph_of_mentions()
+# iramuteq_mentions = Iramuteq(
+#     gephi_content.graph.nodes,
+#     scraped_tweets,
+#     ['tweet', 'rts']
+# )
 
-iramuteq_mentions.create_file('iramuteq_rts_abril')
+# iramuteq_mentions.create_file('iramuteq_rts_abril')
 
 # print(iramuteq_mentions.tweets)
 
 #
-# # Get headers for Gephi csv files
-# nodes_headers = get_key_list(
-#                 gephi_content.graph.nodes[-1])
-# edges_headers = get_key_list(
-#                 gephi_content.graph.edges[-1])
-#
-# print('Writing nodes file')
-# # Write node files for retweets
-# csv_handler(
-#     'nodes_mentions_abril',
-#     gephi_content.graph.nodes,
-#     nodes_headers
-# )
-# print('Writing edges file')
-# # Write edges files for retweets
-# csv_handler(
-#     'edges_mentions_abril',
-#     gephi_content.graph.edges,
-#     edges_headers
-# )
+# Get headers for Gephi csv files
+nodes_headers = get_key_list(
+                gephi_content.graph.nodes[-1])
+edges_headers = get_key_list(
+                gephi_content.graph.edges[-1])
+
+print('Writing nodes file')
+# Write node files for retweets
+csv_handler(
+    'nodes_mentions_maio',
+    gephi_content.graph.nodes,
+    nodes_headers
+)
+print('Writing edges file')
+# Write edges files for retweets
+csv_handler(
+    'edges_mentions_maio',
+    gephi_content.graph.edges,
+    edges_headers
+)
 

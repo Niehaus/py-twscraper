@@ -20,7 +20,6 @@ class Scraper:
                 for mentionedUser in tweet.mentionedUsers:
                     mentions.append(mentionedUser.username)
 
-            # print(tweet.retweetedTweet)
             is_rt = False
             who_was_rt = None
             if tweet.quotedTweet is not None:
