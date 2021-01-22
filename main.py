@@ -1,7 +1,7 @@
 """
-Coleta de tweets de março a dezembro
-para duas hashtags:
-['cloroquina', 'hidroxicloroquina']
+Scrape tweets that has in its contents
+two words 'cloroquina', 'hidroxicloroquina'
+from march to december of 2020.
 
 @author: Bárbara Boechat
 @date: 18/01/2021
@@ -10,8 +10,8 @@ from query_handler import Scraper
 from gephi_usage import Gephi
 from iramuteq_usage import Iramuteq
 from pprint import pprint
-from utils import csv_handler, get_key_list
-
+from utils import *
+import snscrape.modules.twitter as sntwitter
 twitter_scraper = Scraper()
 
 filenames = ['marco', 'abril', 'maio', 'junho', 'julho',
@@ -31,64 +31,51 @@ dates = [('2020-03-01', '2020-03-31'),  # março
 
 keywords = ['cloroquina', 'hidroxicloroquina']
 
-# for keyword in keywords:
-#     for i in range(0, len(filenames)):
-#         params = {
-#             'filename': 'cloroquina_' + filenames[i],
-#             'since_date': dates[i][0],
-#             'until_date': dates[i][1],
-#             'keyword': keywords,
-#             'max_tweets': 1500
-#         }
-#         print(params)
-#         twitter_scraper.scrape_hashtag_tweets(**params)
-#     print('\n')
+for keyword in keywords:
+    for i in range(0, len(filenames)):
+        params = {
+            'since_date': dates[i][0],
+            'until_date': dates[i][1],
+            'keyword': keyword,
+            'max_tweets': 750
+        }
+        pprint(params)
 
-params = {
-    'since_date': dates[1][0],
-    'until_date': dates[1][1],
-    'keyword': keywords[0],
-    'max_tweets': 500
-}
+        # Scrape all needed tweets
+        scraped_tweets = twitter_scraper.cli_scrape_tweets_by_content(**params)
 
-# filename = 'cloroquina_' + filenames[1]
-# headers = ['Id', 'Label', 'mentioned_users']
-# csv_handler('result_test', content, headers)
+        # Create the graph of mentions
+        gephi = Gephi(scraped_tweets)
+        gephi.graph_of_mentions()
 
-scraped_tweets = twitter_scraper.cli_scrape_tweets_by_content(**params)
-gephi_content = Gephi(scraped_tweets)
+        filename = f'gephi_files/mentions/{keyword}_mentions_{filenames[i]}'
+        write_gephi_files(gephi.graph, filename)
 
-# gephi_content.graph_of_rts()
-gephi_content.graph_of_mentions()
-# iramuteq_mentions = Iramuteq(
-#     gephi_content.graph.nodes,
-#     scraped_tweets,
-#     ['tweet', 'rts']
-# )
+        # Create iramuteq file for mentions
+        variables = ['tweet', 'mentions']
+        iramuteq_mentions = Iramuteq(
+            gephi.graph.nodes,
+            scraped_tweets,
+            variables
+        )
+        filename = f'{keyword}_mentions_{filenames[i]}'
+        iramuteq_mentions.create_file(filename)
 
-# iramuteq_mentions.create_file('iramuteq_rts_abril')
+        # Create the graph of retweets
+        gephi = Gephi(scraped_tweets)
+        gephi.graph_of_rts()
 
-# print(iramuteq_mentions.tweets)
+        filename = f'gephi_files/rts/{keyword}_rts_{filenames[i]}'
+        write_gephi_files(gephi.graph, filename)
 
-#
-# # Get headers for Gephi csv files
-nodes_headers = get_key_list(
-                gephi_content.graph.nodes[-1])
-edges_headers = get_key_list(
-                gephi_content.graph.edges[-1])
-
-print('Writing nodes file')
-# Write node files for retweets
-csv_handler(
-    'nodes_mentions_abril_test2',
-    gephi_content.graph.nodes,
-    nodes_headers
-)
-print('Writing edges file')
-# Write edges files for retweets
-csv_handler(
-    'edges_mentions_abril_test2',
-    gephi_content.graph.edges,
-    edges_headers
-)
-
+        # Create iramuteq file for retweets
+        variables = ['tweet', 'rts']
+        iramuteq_mentions = Iramuteq(
+            gephi.graph.nodes,
+            scraped_tweets,
+            variables
+        )
+        filename = f'{keyword}_rts_{filenames[i]}'
+        iramuteq_mentions.create_file(filename)
+        print('Next up!\n')
+print('All clear, have fun! :D')

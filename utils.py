@@ -3,7 +3,7 @@ import csv
 
 def csv_handler(filename, csv_content, headers):
     # Open/create a file to append data to
-    filepath = f'scraped_tweets_csv/{filename}.csv'
+    filepath = f'{filename}.csv'
     csv_file = open(filepath, 'w', newline='', encoding='utf8')
 
     # Use csv writer
@@ -19,6 +19,28 @@ def csv_handler(filename, csv_content, headers):
 
     csv_file.close()
     print(f'Check out scraped_tweets_csv/{filename}.csv')
+
+
+def write_gephi_files(graph, filename):
+    # Get headers for Gephi csv files
+    nodes_headers = get_key_list(graph.nodes[-1])
+    edges_headers = get_key_list(graph.edges[-1])
+
+    # Write node file
+    file = f'{filename}_nodes'
+    csv_handler(
+        file,
+        graph.nodes,
+        nodes_headers
+    )
+
+    # Write edges file
+    file = f'{filename}_edges'
+    csv_handler(
+        file,
+        graph.edges,
+        edges_headers
+    )
 
 
 def get_key_list(my_dict):
