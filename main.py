@@ -30,7 +30,7 @@ dates = [('2020-03-01', '2020-03-31'),  # março
          ('2020-12-01', '2020-12-31')]  # dezembro
 
 # keywords = ['cloroquina', 'hidroxicloroquina']
-keywords = ['hidroxicloroquina']
+keywords = ['cloroquina']
 
 for keyword in keywords:
     for i in range(0, len(filenames)):
