@@ -33,7 +33,7 @@ dates = [('2020-03-01', '2020-03-31'),  # março
 keywords = ['hidroxicloroquina']
 
 for keyword in keywords:
-    for i in range(0, len(filenames)):
+    for i in range(1, len(filenames)):
         params = {
             'since_date': dates[i][0],
             'until_date': dates[i][1],
@@ -63,20 +63,20 @@ for keyword in keywords:
         iramuteq_mentions.create_file(filename)
 
         # Create the graph of retweets
-        gephi = Gephi(scraped_tweets)
-        gephi.graph_of_rts()
-
-        filename = f'gephi_files/rts/{keyword}_rts_{filenames[i]}'
-        write_gephi_files(gephi.graph, filename)
-
-        # Create iramuteq file for retweets
-        variables = ['tweet', 'rts']
-        iramuteq_mentions = Iramuteq(
-            gephi.graph.nodes,
-            scraped_tweets,
-            variables
-        )
-        filename = f'{keyword}_rts_{filenames[i]}'
-        iramuteq_mentions.create_file(filename)
+        # gephi = Gephi(scraped_tweets)
+        # gephi.graph_of_rts()
+        #
+        # filename = f'gephi_files/rts/{keyword}_rts_{filenames[i]}'
+        # write_gephi_files(gephi.graph, filename)
+        #
+        # # Create iramuteq file for retweets
+        # variables = ['tweet', 'rts']
+        # iramuteq_mentions = Iramuteq(
+        #     gephi.graph.nodes,
+        #     scraped_tweets,
+        #     variables
+        # )
+        # filename = f'{keyword}_rts_{filenames[i]}'
+        # iramuteq_mentions.create_file(filename)
         print('Next up!\n')
 print('All clear, have fun! :D')

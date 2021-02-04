@@ -1,10 +1,10 @@
 import csv
-
+import os
 
 def csv_handler(filename, csv_content, headers):
     # Open/create a file to append data to
     filepath = f'{filename}.csv'
-    csv_file = open(filepath, 'w', newline='', encoding='utf8')
+    csv_file = open(filepath, 'a', newline='', encoding='utf8')
 
     # Use csv writer
     csv_writer = csv.writer(csv_file)
@@ -41,6 +41,26 @@ def write_gephi_files(graph, filename):
         graph.edges,
         edges_headers
     )
+
+
+def write_rts(tweet):
+    filepath = f'rt_content_dir/rt_content.csv'
+
+    if not os.path.isfile(filepath):
+        csv_file = open(filepath, 'a', newline='', encoding='utf8')
+        csv_writer = csv.writer(csv_file)
+        csv_writer.writerow(['rt_id',
+                             'who_was_rt',
+                             'content_of_rt']
+                            )
+    else:
+        csv_file = open(filepath, 'a', newline='', encoding='utf8')
+        csv_writer = csv.writer(csv_file)
+
+    row = [tweet['rt_id'], tweet['who_was_rt'], tweet['content_of_rt']]
+    csv_writer.writerow(row)
+    csv_file.close()
+    # print(f'Retweet written to {filepath}')
 
 
 def get_key_list(my_dict):
