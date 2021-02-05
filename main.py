@@ -35,7 +35,7 @@ dates = [('2020-03-01', '2020-03-31'),  # março
 keywords = ['hidroxicloroquina']
 
 for keyword in keywords:
-    for i in range(9, 10):
+    for i in range(8, 10):
         params = {
             'since_date': dates[i][0],
             'until_date': dates[i][1],
