@@ -32,10 +32,10 @@ dates = [('2020-03-01', '2020-03-31'),  # março
          ('2020-12-01', '2020-12-31')]  # dezembro
 
 # keywords = ['cloroquina', 'hidroxicloroquina']
-keywords = ['cloroquina']
+keywords = ['hidroxicloroquina']
 
 for keyword in keywords:
-    for i in range(0, len(filenames)):
+    for i in range(9, 10):
         params = {
             'since_date': dates[i][0],
             'until_date': dates[i][1],
@@ -63,7 +63,7 @@ for keyword in keywords:
         )
         filename = f'{keyword}_mentions_{filenames[i]}'
         iramuteq_mentions.create_file(filename)
-        sleep(60)
+        sleep(180)
         # Create the graph of retweets
         # gephi = Gephi(scraped_tweets)
         # gephi.graph_of_rts()
