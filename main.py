@@ -6,12 +6,14 @@ from march to december of 2020.
 @author: Bárbara Boechat
 @date: 18/01/2021
 """
-from query_handler import Scraper
+from pprint import pprint
+from time import sleep
+
 from gephi_usage import Gephi
 from iramuteq_usage import Iramuteq
-from pprint import pprint
+from query_handler import Scraper
 from utils import *
-import snscrape.modules.twitter as sntwitter
+
 twitter_scraper = Scraper()
 
 filenames = ['marco', 'abril', 'maio', 'junho', 'julho',
@@ -33,7 +35,7 @@ dates = [('2020-03-01', '2020-03-31'),  # março
 keywords = ['hidroxicloroquina']
 
 for keyword in keywords:
-    for i in range(1, len(filenames)):
+    for i in range(8, 10):
         params = {
             'since_date': dates[i][0],
             'until_date': dates[i][1],
@@ -61,7 +63,7 @@ for keyword in keywords:
         )
         filename = f'{keyword}_mentions_{filenames[i]}'
         iramuteq_mentions.create_file(filename)
-
+        sleep(180)
         # Create the graph of retweets
         # gephi = Gephi(scraped_tweets)
         # gephi.graph_of_rts()
