@@ -18,15 +18,15 @@ if __name__ == '__main__':
     with open(f'boulos/coleta/{file}') as json_file:
         tweets = json.load(json_file)
 
-    # # # Create graph of mentions
-    # gephi = Gephi(tweets)
-    # gephi.graph_of_mentions()
-    #
-    # date = ''.join(file.split(".json"))
-    # filename = f'boulos/gephi_files/mentions/mentions_{date}'
-    # write_gephi_files(gephi.graph, filename)
-    #
-    # sleep(180)
+    # Create graph of mentions
+    gephi = Gephi(tweets)
+    gephi.graph_of_mentions()
+
+    date = ''.join(file.split(".json"))
+    filename = f'boulos/gephi_files/mentions/mentions_{date}'
+    write_gephi_files(gephi.graph, filename)
+
+    sleep(180)
 
     # Create graph of retweets
     gephi = Gephi(tweets)
