@@ -58,9 +58,11 @@ class Scraper:
 
             username = data['user']['username']
             verified = data['user']['verified']
+            protected = data['user']['protected']
             followers = data['user']['followersCount']
             mentioned_users = data['mentionedUsers']
             quoted_tweet = data['quotedTweet']
+
 
             mentions = mentions_in_tweet(mentioned_users)
             quoted_tweet, is_rt = is_retweet(quoted_tweet)
@@ -73,6 +75,7 @@ class Scraper:
                 'content': data['renderedContent'],
                 'mentioned_users': ' '.join(mentions),
                 'verified': verified,
+                'protected': protected,
                 'is_rt': is_rt,
                 'who_was_rt': quoted_tweet['who_was_rt'],
                 'content_of_rt': quoted_tweet['rt_content'],

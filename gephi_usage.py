@@ -1,4 +1,5 @@
 import snscrape.modules.twitter as sntwitter
+from time import sleep
 from utils import write_rts
 
 
@@ -9,6 +10,7 @@ class Gephi:
         self.used_ids = []
         self.retweets_counter = []
         self.suspended_users_id = [-1]
+        self.multi = 1
         self.graph = GephiData()
 
     def graph_of_mentions(self):
@@ -90,7 +92,6 @@ class Gephi:
             rt_ranking.append(my_tuple)
         rt_ranking = sorted(rt_ranking, key=lambda x: x[1], reverse=True)
 
-
     def get_node(self, username):
         for tweet in self.graph.nodes:
             if username == tweet['Label']:
@@ -98,6 +99,12 @@ class Gephi:
 
     # Aux scraper method to get a specific user info
     def get_user_info(self, username):
+        edges_count = len(self.graph.edges) > 0
+        if edges_count and self.graph.edges[-1]['Label'] + 1 >= 800 * self.multi:
+            print('muitos perfiss, perai', self.graph.edges[-1]['Label'] + 1)
+            self.multi += 1
+            sleep(180)
+            print('beleza, bora')
         try:
             user = sntwitter.TwitterUserScraper(username).entity
             user_info = {
