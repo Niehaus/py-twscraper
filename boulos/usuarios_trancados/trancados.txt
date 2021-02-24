@@ -1,0 +1,110 @@
+
+Adicionar nós
+2020-11-16
+1 - oantikristopher citou ovocozinheiro(trancado)
+ {
+    "Id": 1328487998099492873,
+    "Label": "oantikristopher",
+    "link": "https://twitter.com/oantikristopher",
+    "followers": 379,
+    "content": "@ovocozinheiro T\u00f4 assistindo tamb\u00e9m, o banquete do Boulos",
+    "mentioned_users": "ovocozinheiro",
+    "verified": false,
+    "is_rt": false,
+    "who_was_rt": null,
+    "content_of_rt": null,
+    "rt_id": null
+  }
+
+  2020-11-17
+{
+"Id": 1328839729962491905,
+"Label": "edsonkcury",
+"link": "https://twitter.com/edsonkcury",
+"followers": 1061,
+"content": "@nicaguiar @oswaldojor S\u00f3 pq Boulos est\u00e1 no 2o turno teve fraude?!\nN\u00e3o sei se vc imagina, a quantidade de pessoas miser\u00e1veis q vivem l\u00e1, p SP ser a cidade mais rica do estado, sen\u00e3o do Brasil.\nE vc acha q todo esse pessoal iria votar naqueles q defendem \"a nobreza\" na cara dura?\nkkkk",
+"mentioned_users": "nicaguiar oswaldojor",
+"verified": false,
+"is_rt": false,
+"who_was_rt": null,
+"content_of_rt": null,
+"rt_id": null
+},
+
+
+2020-11-18
+{
+    "Id": 1329202006494425092,
+    "Label": "OcimarFalcao",
+    "link": "https://twitter.com/OcimarFalcao",
+    "followers": 224,
+    "content": "@belemtransito N\u00e3o gosto do Boulos, mas essas fake news podiam resultar em pris\u00f5es inafian\u00e7\u00e1veis, a\u00ed talvez produzisse efeito. Elas elegeram o pior presidente da hist\u00f3ria e podem reelege-lo, vamos ficar atentos",
+    "mentioned_users": "belemtransito",
+    "verified": false,
+    "is_rt": false,
+    "who_was_rt": null,
+    "content_of_rt": null,
+    "rt_id": null
+  },
+
+   {
+    "Id": 1329207872379555841,
+    "Label": "nebels",
+    "link": "https://twitter.com/nebels",
+    "followers": 1985,
+    "content": "Marina Silva \u00e9 Boulos e Boulos \u00e9 Marina Silva gazetabrasil.com.br/especiais/elei\u2026 via @Gazeta Brasil - Not\u00edcias do Brasil e do Mundo atualizadas a cada minuto.",
+    "mentioned_users": "gazeta",
+    "verified": false,
+    "is_rt": false,
+    "who_was_rt": null,
+    "content_of_rt": null,
+    "rt_id": null
+  },
+
+  {
+    "Id": 1329205999463505922,
+    "Label": "igorpaccini",
+    "link": "https://twitter.com/igorpaccini",
+    "followers": 114,
+    "content": "@christian_ppa Eu to vendo no que vai dar, sem botar tantad expectativas, pq duas semanas \u00e9 pouco tempo ora uma virada, mas tbm nao \u00e9 imposs\u00edvel, poder de comunica\u00e7\u00e3o do boulos \u00e9 tremendo",
+    "mentioned_users": "christian_ppa",
+    "verified": false,
+    "is_rt": false,
+    "who_was_rt": null,
+    "content_of_rt": null,
+    "rt_id": null
+  },
+
+    {
+    "Id": 1329204121367420928,
+    "Label": "mooriilo",
+    "link": "https://twitter.com/mooriilo",
+    "followers": 41,
+    "content": "@httpdsn @joaofvro vdd eu era o boulos",
+    "mentioned_users": "httpdsn joaofvro",
+    "verified": false,
+    "is_rt": false,
+    "who_was_rt": null,
+    "content_of_rt": null,
+    "rt_id": null
+  },
+
+  2020-11-19
+
+
+
+  2020-11-22
+
+    {
+    "Id": 1330640440220069892,
+    "Label": "jcoreixas",
+    "link": "https://twitter.com/jcoreixas",
+    "followers": 3311,
+    "content": "Tabata vota em Boulos..\nEla nunca enganou ningu\u00e9m ... twitter.com/SigaGazetaBR/s\u2026",
+    "mentioned_users": "No Mentions",
+    "verified": false,
+    "is_rt": true,
+    "who_was_rt": "SigaGazetaBR",
+    "content_of_rt": "Tabata Amaral declara voto em Boulos, do Psol https://t.co/8RlLchkog1",
+    "rt_id": 1330298936742055939
+  },

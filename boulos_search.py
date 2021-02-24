@@ -1,7 +1,12 @@
-## 15 a 28 de novembro, 1500 por dia
+"""
+Scrape tweets that contains the keyword
+'boulos', from november 15 to november 28,
+1500 tweets per day.
 
+@author: Bárbara Boechat
+@date: 22/02/2021
+"""
 import json
-
 from query_handler import *
 
 get_tweets = Scraper()
